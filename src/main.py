@@ -3,51 +3,50 @@
 #       ************************************************************
 #       ****            M A I N . P Y  ____  F I L E.           ****
 #       ************************************************************
-#
-#
-#     AUTHORS:      ╔══  GROUP #6  ═════════════════════════════╗
-#                   ║                                           ║
-#                   ║  Hemu Babis,         Elizabeth Barnett,   ║
-#                   ║  Michael Bell,       Collin Bond,         ║
-#                   ║  Daniel Huynh,       Q Ntsasa.            ║
-#                   ╚═══════════════════════════════════════════╝
-#
-#   PROFESSOR:      Christopher Gilmore
-#
-#      COURSE:      CS-314 Elements of Software Engineering.
-#
-#       DATED:      Fall, 2024.
-#
-###############################################################################
 
+###############################################################################
 import msvcrt
 import sys
-import textwrap  
-from functions import activity_recommendation, food_recommendation, custom_recommendation  # Import functions
+from huggingface_hub import login
+import torch
+from functions import generate_prompt, test_model  # Import functions
 #   "main"
 #
 def main() -> int:
     # Welcome Menu
+     login("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")
      print("Welcome to the AI Recommendation Software\nPress any key to continue")
      msvcrt.getch()
-     while True:
     
-        print("What type of recommendation would you like?\n(1) Activity Recommendation (2) Food recommendation (3) Custom Recommendation: ")
-        key=msvcrt.getch()
+    
+       # print("What type of recommendation would you like?\n(1) Activity Recommendation (2) Food recommendation (3) Trip Planner (4) Custom Recommendation (5) Exit: ")
+       # key=msvcrt.getch()
+     
+     test_model()
+
+     print("\nModel test complete.\n")
+
+     return 0
+'''
         if key == b'1':
             activity=input("\nEneter location for Activity: ")
             # Activity Recommendation Function
-            activity_recommendation(activity)
+            generate_prompt(1,activity)
             break
         if key == b'2':
             food = input("\nEneter location for Food: ")
             # Food Recommendation Function
-            food_recommendation(food)
+            generate_prompt(2,food)
             break
         if key == b'3':
-            custom=input("\nWhat type of recommendation: ")
+            custom=input("\nWhere will you be traveling?: ")
             # Custom Recommendation Function
-            custom_recommendation(custom)
+            generate_prompt(3,custom)
+            break
+        if key == b'4':
+            custom=input("\nWhat recommendation would you like?: ")
+            # Custom Recommendation Function
+            generate_prompt(4,custom)
             break
         elif key == b'4':  # Exit option
             print("\nExiting the program...")
@@ -56,8 +55,7 @@ def main() -> int:
         else:
             print("\nInvalid choice. Please select 1, 2, 3, or 4.")
     
-   
-     return 0
+'''
 
     
 ###############################################################################
